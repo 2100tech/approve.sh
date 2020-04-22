@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import FlipCard from './components/FlipCard.vue'
+import FlipCard from './FlipCard.vue'
 
 export default {
   name: 'ApprovalCard',
