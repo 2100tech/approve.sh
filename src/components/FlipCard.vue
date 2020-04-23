@@ -5,14 +5,14 @@
         <slot name="front"></slot>
         <v-icon class="frontFlipBtn" 
             v-on:click="flipped=true">
-            redo
+            flip
         </v-icon>
       </div>
       <div class="back">
         <slot name="back"></slot>
         <v-icon class="backFlipBtn" 
             v-on:click="flipped=false">
-            redo
+            flip back
         </v-icon>
       </div>
     </div>
@@ -33,7 +33,7 @@ export default {
 <style type='text/css' scoped>
 i.frontFlipBtn,
 i.backFlipBtn {
-    position:absolute; 
+    position:relative; 
     right: 20px; 
     top: 20px;
     color:#FFFFFF;

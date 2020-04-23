@@ -1,20 +1,28 @@
 <template>
-  <FlipCard>
-    <template slot="front">
-      <span>Hey loser</span>
-    </template>
-    <template slot="back">
-      <span>Thought u could get rid of me loser?</span>
-    </template>
-  </FlipCard>
+  <div class="position card-size">
+    <FlipCard>
+      <template slot="front">
+        <BaseCard>
+          <span>Hey loser</span>
+        </BaseCard>
+      </template>
+      <template  slot="back">
+        <BaseCard>
+          <span>Thought u could get rid of me loser?</span>
+        </BaseCard>
+      </template>
+    </FlipCard>
+  </div>
 </template>
 
 <script>
+import BaseCard from './ui/BaseCard.vue'
 import FlipCard from './FlipCard.vue'
 
 export default {
   name: 'ApprovalCard',
   components: {
+    BaseCard,
     FlipCard,
   }
 }
@@ -22,18 +30,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+.position {
+  position: relative;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.card-size {
+  width: 300px;
+  height: 425px;
 }
 </style>
