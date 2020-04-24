@@ -3,17 +3,17 @@
     <div class="flipper">
       <div class="front">
         <slot name="front"></slot>
-        <v-icon class="frontFlipBtn" 
+        <!-- <v-icon class="frontFlipBtn" 
             v-on:click="flipped=true">
             flip
-        </v-icon>
+        </v-icon> -->
       </div>
       <div class="back">
         <slot name="back"></slot>
-        <v-icon class="backFlipBtn" 
+        <!-- <v-icon class="backFlipBtn" 
             v-on:click="flipped=false">
             flip back
-        </v-icon>
+        </v-icon> -->
       </div>
     </div>
   </div>
@@ -22,10 +22,11 @@
 <script>
 export default {
   name: 'FlipCard',
-  data: function() {
-    return {
-        flipped: false
-    };
+  props: {
+    flipped: {
+      type: Boolean,
+      default: false
+    }
   }
 };
 </script>
@@ -39,11 +40,11 @@ i.backFlipBtn {
     color:#FFFFFF;
 }
 i.backFlipBtn {
-    -webkit-transform: rotateY(-180deg);
-    -moz-transform: rotateY(-180deg);
-    -o-transform: rotateY(-180deg);
-    -ms-transform: rotateY(-180deg);
-    transform: rotateY(-180deg);
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    transform: rotateY(180deg);
 }
 .flip-container {
   -webkit-perspective: 1000;
@@ -80,11 +81,11 @@ i.backFlipBtn {
   width: 100%;
 }
 .back {
-  -webkit-transform: rotateY(-180deg);
-  -moz-transform: rotateY(-180deg);
-  -o-transform: rotateY(-180deg);
-  -ms-transform: rotateY(-180deg);
-  transform: rotateY(-180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  transform: rotateY(180deg);
   position: absolute;
 }
 .flip-container.flipped .back {
@@ -95,11 +96,11 @@ i.backFlipBtn {
   transform: rotateY(0deg);
 }
 .flip-container.flipped .front {
-  -webkit-transform: rotateY(180deg);
-  -moz-transform: rotateY(180deg);
-  -o-transform: rotateY(180deg);
-  -ms-transform: rotateY(180deg);
-  transform: rotateY(180deg);
+  -webkit-transform: rotateY(-180deg);
+  -moz-transform: rotateY(-180deg);
+  -o-transform: rotateY(-180deg);
+  -ms-transform: rotateY(-180deg);
+  transform: rotateY(-180deg);
 }
 .front {
   z-index: 2;

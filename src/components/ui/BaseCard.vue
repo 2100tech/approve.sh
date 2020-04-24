@@ -2,16 +2,19 @@
   <div class="container corners card-size relative-position" :style="style">
 
     <!-- platform logo -->
-    <img class="platform-logo relative-position" :src="require('@/assets/platform/' + platform + '.png')">
+    <div class="align-left flex">
+      <img class="platform-logo relative-position box" :src="require('@/assets/platform/' + platform + '.png')">
+      <button class="box" v-on:click="onClick">{{ buttonTitle }}</button>
+    </div>
     <hr class="line" :style="lineStyle"/>
 
     <!-- Allowance info -->
     <div class="box">
-    <h1>{{ allowance }}</h1>
-    <div class="row-left">
-      <img class="token-logo box" :src="require('@/assets/token/' + token + '.png')">
-      <h3 class="box">{{ tokenSymbol }}</h3>
-    </div>
+      <h1>{{ allowance }}</h1>
+      <div class="align-left">
+        <img class="token-logo box" :src="require('@/assets/token/' + token + '.png')">
+        <h3 class="box">{{ tokenSymbol }}</h3>
+      </div>
     </div>
     <hr class="bottom-line" :style="lineStyle"/>
 
@@ -35,7 +38,7 @@
 <script>
 export default {
   name: 'BaseCard',
-  props: ['backgroundColor', 'borderColor', 'platform', 'allowance', 'token', 'tokenSymbol', 'usingDefautlBottomView'],
+  props: ['backgroundColor', 'borderColor', 'platform', 'allowance', 'token', 'tokenSymbol', 'usingDefautlBottomView', 'buttonTitle'],
   computed: {
     style() {
       return {
@@ -48,6 +51,11 @@ export default {
         border: '1px solid ' + this.borderColor
       };
     }
+  },
+  methods: {
+    onClick() {
+      this.$emit('button-click');
+    }
   }
 }
 </script>
@@ -59,8 +67,9 @@ export default {
   text-align: left;
 }
 .platform-logo {
-  width: 280px;
+  width: 250px;
   height: 40px;
+  object-fit: contain;
 }
 .line {
   width: 100%;
@@ -91,8 +100,29 @@ export default {
 h1 {
   margin-bottom:10px;
 }
-.row-left {
+button {
+  border: none;
+  position: absolute; 
+  right: 0;
+  background-color: #00000000;
+  width: 80px;
+  height: 40px;
+  color: #EB39DC;
+  font-family: "Helvetica Neue", "sans serif";
+  font-size: 21px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  line-height: 21px;
+}
+.align-left {
   text-align: left;
+}
+.align-right {
+  text-align: right;
+}
+.flex {
+  display: flex;
 }
 .box {
   display: inline-block;
@@ -101,8 +131,8 @@ h1 {
 }
 .warning {
   display: block;
-  height: 207px;
-  margin: -10px -18px -5px -18px;
+  height: 210px;
+  margin: -7px -18px -5px -18px;
   background-color: #E6DC24;
 }
 .left-bottom-corner {

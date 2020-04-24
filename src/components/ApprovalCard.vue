@@ -1,6 +1,8 @@
 <template>
   <div class="position card-size">
-    <FlipCard>
+    <FlipCard
+      v-bind:flipped="flipped"
+    >
       <template slot="front">
         <BaseCard
           v-bind:backgroundColor="backgroundColor"
@@ -10,6 +12,8 @@
           v-bind:token="approval.token"
           v-bind:tokenSymbol="approval.tokenSymbol"
           v-bind:usingDefautlBottomView="usingDefautlBottomView"
+          buttonTitle="Edit"
+          @button-click="buttonClick"
         ></BaseCard>
       </template>
       <template  slot="back">
@@ -21,6 +25,8 @@
           v-bind:token="approval.token"
           v-bind:tokenSymbol="approval.tokenSymbol"
           v-bind:usingDefautlBottomView="usingDefautlBottomView"
+          buttonTitle="Cancel"
+          @button-click="buttonClick"
         ></BaseCard>
       </template>
     </FlipCard>
@@ -37,7 +43,13 @@ export default {
     BaseCard,
     FlipCard,
   },
-  props: ['approval'],
+  props: {
+    'approval': {},
+    'flipped': {
+      type: Boolean,
+      default: false
+    }
+  },
   computed: {
     isWarning() {
       return true;  // TODO
@@ -50,6 +62,11 @@ export default {
     },
     usingDefautlBottomView() {
       return this.isWarning;
+    }
+  },
+  methods: {
+    buttonClick: function() {
+      this.flipped = !this.flipped;
     }
   }
 }

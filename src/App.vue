@@ -1,24 +1,29 @@
 <template>
   <div id="app" class="grid-container">
     <div class="header">
+      <h1 class="header">Approve<span class="tint-color">.</span>sh</h1>
     </div>
     <Approvals class="approvals"/>
-    <div class="account">
-    </div>
+    <Account class="account"/>
     <div class="notification">
     </div>
     <div class="footer">
+      <div class="footer-container">
+        <h2 class="footer-content">🌛</h2>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Approvals from './pages/Approvals.vue'
+import Account from './pages/Account.vue'
 
 export default {
   name: 'App',
   components: {
-    Approvals
+    Approvals,
+    Account
   }
 }
 </script>
@@ -42,11 +47,12 @@ h1 {
 }
 h2 {
   font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black", "sans serif";
-  font-size: 36px;
+  font-size: 24px;
   font-style: normal;
   font-variant: normal;
   font-weight: bold;
-  line-height: 36px;
+  line-height: 24px;
+  color: #737372;
 }
 h3 {
   font-family: "Helvetica Neue", "sans serif";
@@ -57,20 +63,39 @@ h3 {
   line-height: 21px;
   color: #737372;
 }
-.header { grid-area: header }
+.tint-color {
+  color: #EB39DC;
+}
+.header { 
+  grid-area: header; 
+  text-align: left;
+}
 .approvals { grid-area: approvals }
 .account { grid-area: account }
 .notification { grid-area: notification }
-.footer { grid-area: footer }
+.footer {
+  grid-area: footer;
+}
+.footer-container {
+  display: block;
+}
+.footer-content {
+  margin-top: 100px;
+  display: inline-block;
+  vertical-align: bottom;
+  font-weight: bolder;
+  font-size: 18px;
+  line-height: 18px;
+}
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 100px 1fr 1fr 100px;
+  grid-template-columns: 1fr 670px 60px 300px 1fr;
+  grid-template-rows: 100px 1fr 1fr 200px;
   grid-template-areas:
-    'header header header header header header header header'
-    '. approvals approvals approvals approvals account account .'
-    '. approvals approvals approvals approvals notification notification .'
-    'footer footer footer footer footer footer footer footer';
+    '. header header header .'
+    '. approvals . account .'
+    '. approvals . notification .'
+    '. footer footer footer .';
   grid-gap: 10px;
 
 }
