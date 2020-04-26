@@ -2,6 +2,7 @@
 
 import * as PlatformService from './PlatformService.js';
 import * as TokenService from './TokenService.js';
+import hash from 'object-hash';
 
 var web3 = null;
 
@@ -12,6 +13,7 @@ var web3 = null;
  * @property {Token} token - erc20 token
  * @property {string} balance - owner's token balance
  * @property {string} allowance - allowance
+ * @property {hash} hash - sha1 hash of approval
  */
 
 export function initService(web3Instance) {
@@ -23,12 +25,12 @@ export async function fetchAccountApprovals(account) {
   const platforms = PlatformService.platforms;
   var approvals = [];
 
-  tokens.forEach(function(token) {
-    let ERC20token = new web3.eth.Contract(require(`@/abi/${token.symbol}.json`), token.address);
+  tokens.forEach(async function(token) {
+    let ERC20token = new web3.eth.Contract(require(`@/abi/ERC20.json`), token.address);
+    let balance = await getTokenBalance(ERC20token, account);
 
     platforms.forEach(async function(platform) {
       let allowance = await fetchTokenAllowance(ERC20token, account, platform.address);
-      let balance = await getTokenBalance(ERC20token, account);
 
       if (allowance != "0") {
         let approval = {
@@ -38,12 +40,15 @@ export async function fetchAccountApprovals(account) {
           balance: balance,
           allowance: allowance
         };
+        approval.hash = hash(approval);
 
         approvals.push(approval);
       }
     });
   });
 
+  console.log(approvals);
+  
   return approvals;
 }
 
@@ -63,7 +68,7 @@ export async function fetchTokenAllowance(token, owner, spender) {
 
 export async function getTokenBalance(token, owner) {
   return new Promise((resolve, reject) =>  {
-    token.methods.getBalance(owner).call()
+    token.methods.balanceOf(owner).call()
       .then(result => {
         resolve(result);
       })

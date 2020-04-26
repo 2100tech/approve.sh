@@ -14,5 +14,17 @@ export const tokens = [
     name: "Dai",
     symbol: "dai",
     decimals: 18
+  },
+  {
+    address: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+    name: "USDC",
+    symbol: "usdc",
+    decimals: 6
+  },
+  {
+    address: "0xdac17f958d2ee523a2206206994597c13d831ec7",
+    name: "USDT",
+    symbol: "usdt",
+    decimals: 6
   }
 ];

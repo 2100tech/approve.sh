@@ -12,8 +12,8 @@
     <div class="box">
       <h1>{{ allowance }}</h1>
       <div class="align-left">
-        <img class="token-logo box" :src="require('@/assets/token/' + token + '.png')">
-        <h3 class="box">{{ tokenSymbol }}</h3>
+        <img class="token-logo box" :src="require('@/assets/token/' + tokenSymbol + '.png')">
+        <h3 class="box">{{ tokenName }}</h3>
       </div>
     </div>
     <hr class="bottom-line" :style="lineStyle"/>
@@ -22,7 +22,7 @@
     <div v-if="usingDefautlBottomView" class="warning left-bottom-corner right-bottom-corner">
       <div class="row-center">
         <h1 class="box">WARNING!</h1>
-        <div style="vertical-align: middle;background-color: red;">
+        <div class="row-center">
           <h2 class="white black-background row-center">OUT OF CONTROL</h2>
         </div>
       </div>
@@ -38,7 +38,7 @@
 <script>
 export default {
   name: 'BaseCard',
-  props: ['backgroundColor', 'borderColor', 'platform', 'allowance', 'token', 'tokenSymbol', 'usingDefautlBottomView', 'buttonTitle'],
+  props: ['backgroundColor', 'borderColor', 'platform', 'allowance', 'tokenName', 'tokenSymbol', 'usingDefautlBottomView', 'buttonTitle'],
   computed: {
     style() {
       return {
@@ -146,7 +146,8 @@ button {
 }
 .black-background {
   background-color: black;
-  height: 60px;
+  height: 50px;
+  padding-top: 20px;
 }
 .white {
   color: white;

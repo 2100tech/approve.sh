@@ -7,10 +7,10 @@
         <BaseCard
           v-bind:backgroundColor="backgroundColor"
           v-bind:borderColor="borderColor"
-          v-bind:platform="approval.platform"
-          v-bind:allowance="approval.allowance"
-          v-bind:token="approval.token"
-          v-bind:tokenSymbol="approval.tokenSymbol"
+          v-bind:platform="approval.platform.logo"
+          v-bind:allowance="isWarning ? '∞' : approval.allowance"
+          v-bind:tokenName="approval.token.name"
+          v-bind:tokenSymbol="approval.token.symbol"
           v-bind:usingDefautlBottomView="usingDefautlBottomView"
           buttonTitle="Edit"
           @buttonPressed="buttonPressed"
@@ -20,10 +20,10 @@
         <BaseCard
           v-bind:backgroundColor="backgroundColor"
           v-bind:borderColor="borderColor"
-          v-bind:platform="approval.platform"
+          v-bind:platform="approval.platform.logo"
           v-bind:allowance="approval.allowance"
-          v-bind:token="approval.token"
-          v-bind:tokenSymbol="approval.tokenSymbol"
+          v-bind:tokenName="approval.token.name"
+          v-bind:tokenSymbol="approval.token.symbol"
           v-bind:usingDefautlBottomView="usingDefautlBottomView"
           buttonTitle="Cancel"
           @buttonPressed="buttonPressed"
@@ -52,7 +52,9 @@ export default {
   },
   computed: {
     isWarning() {
-      return true;  // TODO
+      console.log(this.approval.allowance);
+      
+      return this.approval.allowance == "115792089237316195423570985008687907853269984665640564039457584007913129639935";
     },
     backgroundColor() {
       return this.isWarning ? "#E6DC244D" : "#E6DC244D";

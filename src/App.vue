@@ -48,7 +48,7 @@ export default {
       this.$store.account.address = account;
       this.$store.web3 = web3;
       this.$store.approvals = approvals;
-    },    
+    },
   }
 }
 </script>
