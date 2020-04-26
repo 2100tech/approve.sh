@@ -2,7 +2,8 @@
   <div class="align-left">
     <h2>ACCOUNT</h2>
     <div class="card-container corners card-size relative-position border">
-      <h3>0x1234213</h3>
+      <h3 v-if="0 != address.length">{{ address }}</h3>
+      <h3 v-else>Need to connect to MetaMask</h3>
       <hr class="line border"/>
       <div class="align-left">
         <h2 class="box">3</h2>
@@ -19,7 +20,7 @@
 <script>
 export default {
   name: 'BaseCard',
-  props: ['address', 'approvalCount', 'platformCount']
+  props: ['address', 'approvalCount', 'platformCount'],
 }
 </script>
 

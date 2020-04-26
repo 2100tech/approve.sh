@@ -4,7 +4,9 @@
       <h1 class="header">Approve<span class="tint-color">.</span>sh</h1>
     </div>
     <Approvals class="approvals"/>
-    <Account class="account"/>
+    <Account class="account"
+      :address="this.$store.account.address"
+    />
     <div class="notification">
     </div>
     <div class="footer">
@@ -14,15 +16,16 @@
     </div>
     <vue-metamask 
       userMessage="approval.sh" 
-      @onComplete="onComplete"
+      @onComplete="onMetaMaskLoadComplete"
     ></vue-metamask>
   </div>
 </template>
 
 <script>
-import Approvals from './pages/Approvals.vue'
-import Account from './pages/Account.vue'
+import Approvals from './pages/Approvals.vue';
+import Account from './pages/Account.vue';
 import VueMetamask from 'vue-metamask';
+import * as ApprovalService from '@/services/ApprovalService.js';
 
 export default {
   name: 'App',
@@ -31,15 +34,19 @@ export default {
     Account,
     VueMetamask
   },
-  data(){
-    return {
-      msg: "This is demo net work"
-    }
-  },
-  methods:{
-    onComplete(data){
-      console.log('data:', data);
-    }
+  methods: {
+    async onMetaMaskLoadComplete(data) {
+      let account = data.metaMaskAddress;
+      let web3 = data.web3;
+
+      this.$store.account.address = account;
+      this.$store.web3 = web3;
+      ApprovalService.initService(web3);
+
+      let approvals = await ApprovalService.fetchAccountApprovals(account);
+      console.log(approvals);
+      
+    },    
   }
 }
 </script>
