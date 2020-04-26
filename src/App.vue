@@ -12,18 +12,34 @@
         <h2 class="footer-content">🌛</h2>
       </div>
     </div>
+    <vue-metamask 
+      userMessage="approval.sh" 
+      @onComplete="onComplete"
+    ></vue-metamask>
   </div>
 </template>
 
 <script>
 import Approvals from './pages/Approvals.vue'
 import Account from './pages/Account.vue'
+import VueMetamask from 'vue-metamask';
 
 export default {
   name: 'App',
   components: {
     Approvals,
-    Account
+    Account,
+    VueMetamask
+  },
+  data(){
+    return {
+      msg: "This is demo net work"
+    }
+  },
+  methods:{
+    onComplete(data){
+      console.log('data:', data);
+    }
   }
 }
 </script>

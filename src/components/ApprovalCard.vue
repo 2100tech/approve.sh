@@ -13,7 +13,7 @@
           v-bind:tokenSymbol="approval.tokenSymbol"
           v-bind:usingDefautlBottomView="usingDefautlBottomView"
           buttonTitle="Edit"
-          @button-click="buttonClick"
+          @buttonPressed="buttonPressed"
         ></BaseCard>
       </template>
       <template  slot="back">
@@ -26,7 +26,7 @@
           v-bind:tokenSymbol="approval.tokenSymbol"
           v-bind:usingDefautlBottomView="usingDefautlBottomView"
           buttonTitle="Cancel"
-          @button-click="buttonClick"
+          @buttonPressed="buttonPressed"
         ></BaseCard>
       </template>
     </FlipCard>
@@ -65,7 +65,7 @@ export default {
     }
   },
   methods: {
-    buttonClick: function() {
+    buttonPressed: function() {
       this.flipped = !this.flipped;
     }
   }

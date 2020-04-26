@@ -3,17 +3,9 @@
     <div class="flipper">
       <div class="front">
         <slot name="front"></slot>
-        <!-- <v-icon class="frontFlipBtn" 
-            v-on:click="flipped=true">
-            flip
-        </v-icon> -->
       </div>
       <div class="back">
         <slot name="back"></slot>
-        <!-- <v-icon class="backFlipBtn" 
-            v-on:click="flipped=false">
-            flip back
-        </v-icon> -->
       </div>
     </div>
   </div>

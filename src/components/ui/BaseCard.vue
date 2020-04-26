@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     onClick() {
-      this.$emit('button-click');
+      this.$emit('buttonPressed');
     }
   }
 }
