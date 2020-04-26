@@ -7,8 +7,10 @@ var web3 = null;
 
 /**
  * @typedef Approval
+ * @property {string} owner - approval's owner
  * @property {Platform} platform - the platform has been approved
  * @property {Token} token - erc20 token
+ * @property {string} balance - owner's token balance
  * @property {string} allowance - allowance
  */
 
@@ -22,15 +24,18 @@ export async function fetchAccountApprovals(account) {
   var approvals = [];
 
   tokens.forEach(function(token) {
-    console.log("!!" + tokens);
-    let ERC20token = web3.eth.Contract(require(`@/abi/${token.symbol}.json`), token.address);
+    let ERC20token = new web3.eth.Contract(require(`@/abi/${token.symbol}.json`), token.address);
 
     platforms.forEach(async function(platform) {
       let allowance = await fetchTokenAllowance(ERC20token, account, platform.address);
+      let balance = await getTokenBalance(ERC20token, account);
+
       if (allowance != "0") {
         let approval = {
+          owner: account,
           platform: platform,
           token: token,
+          balance: balance,
           allowance: allowance
         };
 
@@ -46,14 +51,26 @@ export async function fetchTokenAllowance(token, owner, spender) {
   return new Promise((resolve, reject) => {
     token.methods.allowance(owner, spender).call()
       .then(result => {
-        result = this.web3.utils.hexToNumberString(result);
         resolve(result);
       })
       // FIXME: solve error message
-      .catch(err => {
-        reject(err);
-        console.log('Failed: ', err.message)
+      .catch(error => {
+        reject(error);
+        console.log('Failed: ', error.message)
       });
+  });
+}
+
+export async function getTokenBalance(token, owner) {
+  return new Promise((resolve, reject) =>  {
+    token.methods.getBalance(owner).call()
+      .then(result => {
+        resolve(result);
+      })
+      .catch(error => {
+        reject(error);
+        console.log('Failed: ', error.message);
+      })
   });
 }
 

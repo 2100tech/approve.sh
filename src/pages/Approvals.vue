@@ -23,36 +23,21 @@ export default {
     return {
         approvals: [
           {
-            platform: 'maker',
+            owner: "0x0f413c30c89a7decf0acf2b53890a13ebfcad6ec",
+            platform: {
+              address: "",
+              name: "MakerDAO",
+              logo: "maker"
+            },
+            token: {
+              addres: "",
+              name: "USDC",
+              symbol: "usdc",
+              decimals: 6
+            },
             allowance: '12,000',
-            token: 'usdt',
-            tokenSymbol: 'USDT',
             balance: '1,000',
             hash: '0'
-          },
-          {
-            platform: 'maker',
-            allowance: '12,000',
-            token: 'usdt',
-            tokenSymbol: 'USDT',
-            balance: '1,000',
-            hash: '1'
-          },
-          {
-            platform: 'maker',
-            allowance: '12,000',
-            token: 'usdt',
-            tokenSymbol: 'USDT',
-            balance: '1,000',
-            hash: '2'
-          },
-          {
-            platform: 'maker',
-            allowance: '12,000',
-            token: 'usdt',
-            tokenSymbol: 'USDT',
-            balance: '1,000',
-            hash: '3'
           }
         ]
     };

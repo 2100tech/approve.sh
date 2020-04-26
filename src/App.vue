@@ -3,7 +3,9 @@
     <div class="header">
       <h1 class="header">Approve<span class="tint-color">.</span>sh</h1>
     </div>
-    <Approvals class="approvals"/>
+    <Approvals class="approvals"
+      :approvals="this.$store.approvals"
+    />
     <Account class="account"
       :address="this.$store.account.address"
     />
@@ -26,6 +28,7 @@ import Approvals from './pages/Approvals.vue';
 import Account from './pages/Account.vue';
 import VueMetamask from 'vue-metamask';
 import * as ApprovalService from '@/services/ApprovalService.js';
+import Web3 from 'web3'
 
 export default {
   name: 'App',
@@ -37,15 +40,14 @@ export default {
   methods: {
     async onMetaMaskLoadComplete(data) {
       let account = data.metaMaskAddress;
-      let web3 = data.web3;
+      let web3 = new Web3(data.web3.currentProvider);
 
+      ApprovalService.initService(web3);
+      let approvals = await ApprovalService.fetchAccountApprovals(account);
+      
       this.$store.account.address = account;
       this.$store.web3 = web3;
-      ApprovalService.initService(web3);
-
-      let approvals = await ApprovalService.fetchAccountApprovals(account);
-      console.log(approvals);
-      
+      this.$store.approvals = approvals;
     },    
   }
 }
